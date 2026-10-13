@@ -11,7 +11,7 @@ It's not on the Chrome Web Store, so you install it yourself. That takes about t
 ## What it does
 
 - Reads the whole thread you're looking at — the post **and** every comment.
-- Lets you ask questions about it: *"What's the consensus?"*, *"Summarize the top advice."*, *"Any opposing views?"*
+- Lets you ask questions about it: *"What are the biggest pain points?"*, *"What are the biggest objections?"*, *"What are the biggest beliefs?"*
 - Works with ChatGPT, Google Gemini, Claude, Grok, DeepSeek, or Groq — whichever you pick.
 - Saves your chats per post. Come back later and the conversation is still there.
 
@@ -80,9 +80,9 @@ No credit card needed. The free tier is plenty for normal use.
 1. Open any Reddit post.
 2. Wait a moment — the panel reads the thread and says **Ready**.
 3. Type a question and press Enter. Good starters:
-   - "What's the consensus?"
-   - "Summarize the top advice."
-   - "Any opposing views?"
+   - "What are the biggest pain points?"
+   - "What are the biggest objections?"
+   - "What are the biggest beliefs?"
 
 **Handy things:**
 
