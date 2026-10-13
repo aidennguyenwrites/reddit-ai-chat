@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Reddit AI Chat</title>
+    <style>
+      body { background: #0f1214; color: #e6e8eb; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 620px; margin: 32px auto; padding: 0 20px; }
+      h1 { font-size: 18px; margin: 0 0 18px; }
+      .tabs { display: flex; gap: 8px; margin-bottom: 22px; }
+      .tab { padding: 8px 16px; border-radius: 999px; border: 1px solid #2a2f34; background: #16191c; color: #9aa3ac; cursor: pointer; font-size: 14px; }
+      .tab.active { background: #2f6bf0; color: #fff; border-color: #2f6bf0; }
+      label { display: block; margin: 16px 0 6px; font-size: 13px; color: #9aa3ac; }
+      input, select { width: 100%; padding: 10px 12px; background: #16191c; color: #e6e8eb; border: 1px solid #2a2f34; border-radius: 8px; font-size: 14px; }
+      button { padding: 10px 18px; background: #2f6bf0; color: #fff; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; }
+      button.secondary { background: #23272b; }
+      .row { display: flex; gap: 12px; align-items: center; margin-top: 20px; flex-wrap: wrap; }
+      .save { margin-left: 4px; color: #4caf50; font-size: 13px; }
+      .err { color: #ff6b6b; font-size: 13px; }
+      .hint { font-size: 12px; color: #6b737b; margin-top: 6px; }
+      .conv { border: 1px solid #23272b; border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; }
+      .conv h3 { margin: 0 0 5px; font-size: 14px; color: #f2f4f6; word-break: break-word; }
+      .conv .meta { font-size: 12px; color: #7c848c; }
+      .conv .actions { margin-top: 10px; display: flex; gap: 8px; }
+      .conv .actions button { padding: 6px 12px; font-size: 12px; }
+      .empty { color: #6b737b; font-size: 14px; padding: 20px 0; }
+    </style>
+  </head>
+  <body>
+    <div class="tabs">
+      <button class="tab active" data-tab="settings">Settings</button>
+      <button class="tab" data-tab="history">Chat history</button>
+    </div>
+
+    <section id="panel-settings">
+      <label>AI provider</label>
+      <select id="provider"></select>
+      <div class="hint" id="providerHint"></div>
+
+      <label>API base URL</label>
+      <input id="baseUrl" />
+      <div class="hint">Filled in automatically when you pick a provider. Only change it if you know what you're doing.</div>
+
+      <label>API key</label>
+      <input id="apiKey" type="password" placeholder="paste your key here" />
+      <div class="hint" id="keyHint"></div>
+      <div class="hint">Stored only in this browser, on this device (not synced to your Google account). Never sent anywhere except the provider you chose.</div>
+
+      <label>Model</label>
+      <input id="model" placeholder="model name" />
+
+      <label>Default reply language</label>
+      <input id="language" placeholder="English" />
+
+      <label>Temperature (0–1 · lower = stricter copying)</label>
+      <input id="temperature" type="number" min="0" max="1" step="0.1" />
+      <div class="hint">Lower = the AI sticks closer to the thread's exact words. 0.1 (the default) is best for careful quoting; raise it for more creative answers.</div>
+
+      <label style="display: flex; align-items: center; gap: 10px; margin-top: 18px; color: #e6e8eb;">
+        <input type="checkbox" id="thinking" style="width: auto;" />
+        <span>Show the model's reasoning / "thinking" when it provides one (mainly DeepSeek — slower and costs more. Off = just the answer.)</span>
+      </label>
+
+      <div class="row">
+        <button id="save">Save</button>
+        <button id="test" class="secondary">Test connection</button>
+        <span class="save" id="msg"></span>
+      </div>
+      <div class="hint" id="version" style="margin-top: 26px;"></div>
+    </section>
+
+    <section id="panel-history" style="display: none;">
+      <div class="row">
+        <button id="clearAll" class="secondary">Clear all history</button>
+        <span class="err" id="hmsg"></span>
+      </div>
+      <div id="convs"></div>
+    </section>
+
+    <script src="options.js"></script>
+  </body>
+</html>
